@@ -28,7 +28,7 @@ services:
         - external
         - internal
     volumes:
-        - ./static:/usr/share/nginx/html
+        - ./streamforce/static:/usr/share/nginx/html
   traefik:
     command:
       - --api.insecure=true
