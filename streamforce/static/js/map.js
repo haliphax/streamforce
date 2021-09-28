@@ -13,20 +13,44 @@ class Game extends Phaser.Scene
 	create() {
 		let sprite = 0;
 
-		this.anims.create({
-			key: 'walkies',
-			frames: this.anims.generateFrameNumbers(
-				'tiles', { frames: [402, 405, 406, 405] }),
-			frameRate: 4,
-			repeat: -1,
-		});
+		const sprites = [
+			this.anims.create({
+				key: 'blue',
+				frames: this.anims.generateFrameNumbers(
+					'tiles', { frames: [354, 357, 358, 357] }),
+				frameRate: 4,
+				repeat: -1,
+			}),
+			this.anims.create({
+				key: 'yellow',
+				frames: this.anims.generateFrameNumbers(
+					'tiles', { frames: [402, 405, 406, 405] }),
+				frameRate: 4,
+				repeat: -1,
+			}),
+			this.anims.create({
+				key: 'green',
+				frames: this.anims.generateFrameNumbers(
+					'tiles', { frames: [450, 453, 454, 453] }),
+				frameRate: 4,
+				repeat: -1,
+			}),
+		];
+
+		let count = 0;
 
 		for (let i = 0; i < 270; i += 16)
 			for (let j = 0; j < 480; j += 16) {
 				const delay = Math.random() * 1000;
+				const choice = sprites[Math.floor(Math.random() * sprites.length)];
 
-				this.add.sprite(j, i).setOrigin(0, 0).playAfterDelay('walkies', delay);
+				this.add.sprite(j, i, 'tiles', choice.frames[0].textureFrame)
+					.setOrigin(0, 0)
+					.playAfterDelay(choice, delay);
+				count++;
 			}
+
+		console.log(`${count} sprites added to scene`);
 	}
 }
 
